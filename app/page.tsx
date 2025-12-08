@@ -1,9 +1,26 @@
 import Image from "next/image";
+import { Header } from "@/components/ui/header-2";
+import { HeroGeometric } from "@/components/ui/shape-landing-hero";
+import { AboutSection } from "@/components/ui/about-section";
+import { ServicesSection } from "@/components/ui/services-section";
+import { DoctorsSection } from "@/components/ui/doctors-section";
+import { TreatmentCalculator } from "@/components/ui/treatment-calculator";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
+    <div className="min-h-screen bg-white font-sans">
+      <Header />
+      <HeroGeometric 
+        badge="Diş Kliniği"
+        title1="Sağlıklı Gülüşler"
+        title2="Modern Diş Hekimliği"
+        description="Uzman diş hekimlerimiz ve son teknoloji ekipmanlarımızla sağlıklı gülüşlerinize kavuşun. Estetik ve tedavi alanında profesyonel hizmet sunuyoruz."
+      />
+      <AboutSection />
+      <ServicesSection />
+      <DoctorsSection />
+      <TreatmentCalculator />
+      <main className="flex min-h-screen w-full max-w-3xl mx-auto flex-col items-center justify-between py-32 px-16 bg-white sm:items-start">
         <Image
           className="dark:invert"
           src="/next.svg"
