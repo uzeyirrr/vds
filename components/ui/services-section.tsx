@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { Calendar, ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -70,6 +70,16 @@ export function ServicesSection({
   ctaLink = "#",
 }: ServicesSectionProps) {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   return (
     <section className="w-full bg-white py-16 md:py-24 px-4 md:px-6 lg:px-8">
@@ -106,7 +116,7 @@ export function ServicesSection({
         </div>
 
         {/* Services Grid */}
-        <div className="flex flex-nowrap justify-center gap-4 md:gap-6 mb-12 md:mb-16 overflow-x-auto pb-4">
+        <div className="flex flex-nowrap justify-start md:justify-center gap-4 md:gap-6 mb-12 md:mb-16 overflow-x-auto pb-4 -mx-4 px-4 md:mx-0 md:px-0">
           {services.map((service, index) => {
             const isExpanded = hoveredId === service.id;
             const hasDetails = service.title && service.description;
@@ -120,12 +130,27 @@ export function ServicesSection({
                 viewport={{ once: true }}
                 onMouseEnter={() => setHoveredId(service.id)}
                 onMouseLeave={() => setHoveredId(null)}
+                onClick={() => {
+                  if (window.innerWidth < 768) {
+                    setHoveredId(isExpanded ? null : service.id);
+                  }
+                }}
                 animate={{
                   opacity: 1,
                   y: 0,
-                  flexBasis: isExpanded && hasDetails ? "400px" : isOtherExpanded ? "160px" : "200px",
-                  minWidth: isExpanded && hasDetails ? "400px" : isOtherExpanded ? "160px" : "180px",
-                  maxWidth: isExpanded && hasDetails ? "400px" : "220px",
+                  flexBasis: isExpanded && hasDetails 
+                    ? isMobile ? "280px" : "400px" 
+                    : isOtherExpanded 
+                    ? isMobile ? "140px" : "160px" 
+                    : isMobile ? "180px" : "200px",
+                  minWidth: isExpanded && hasDetails 
+                    ? isMobile ? "280px" : "400px" 
+                    : isOtherExpanded 
+                    ? isMobile ? "140px" : "160px" 
+                    : isMobile ? "160px" : "180px",
+                  maxWidth: isExpanded && hasDetails 
+                    ? isMobile ? "280px" : "400px" 
+                    : isMobile ? "200px" : "220px",
                 }}
                 transition={{
                   opacity: { duration: 0.5, delay: index * 0.1 },
@@ -177,18 +202,24 @@ export function ServicesSection({
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: 20 }}
                     transition={{ duration: 0.3 }}
-                    className="absolute right-0 top-0 bottom-0 w-[280px] md:w-[320px] bg-green-900/40 backdrop-blur-xl p-6 md:p-8 rounded-l-2xl flex flex-col justify-between shadow-2xl border-l border-white/20"
+                    className="absolute right-0 top-0 bottom-0 w-full md:w-[320px] bg-green-900/95 md:bg-green-900/40 backdrop-blur-xl p-4 md:p-6 lg:p-8 rounded-l-2xl md:rounded-l-2xl rounded-r-2xl md:rounded-r-none flex flex-col justify-between shadow-2xl border-l border-white/20"
                   >
                     <div className="flex-1 flex flex-col justify-start">
-                      <div className="flex items-start justify-between mb-4">
-                        <h4 className="text-white font-bold text-xl md:text-2xl leading-tight pr-2">
+                      <div className="flex items-start justify-between mb-3 md:mb-4">
+                        <h4 className="text-white font-bold text-lg md:text-xl lg:text-2xl leading-tight pr-2">
                           {service.title}
                         </h4>
-                        <div className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 transition-colors flex items-center justify-center shrink-0 cursor-pointer">
-                          <ArrowUpRight className="w-5 h-5 text-white" />
-                        </div>
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setHoveredId(null);
+                          }}
+                          className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-white/10 hover:bg-white/20 active:bg-white/30 transition-colors flex items-center justify-center shrink-0 cursor-pointer"
+                        >
+                          <ArrowUpRight className="w-4 h-4 md:w-5 md:h-5 text-white" />
+                        </button>
                       </div>
-                      <p className="text-white/85 text-sm md:text-base leading-relaxed">
+                      <p className="text-white/85 text-xs md:text-sm lg:text-base leading-relaxed line-clamp-4 md:line-clamp-none">
                         {service.description}
                       </p>
                     </div>

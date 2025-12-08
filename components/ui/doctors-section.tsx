@@ -255,10 +255,10 @@ export function DoctorsSection({
 
       {/* Doctors Slider */}
       <div className="w-full relative">
-        {/* Fade gradient from left - covers 30% of the visible area */}
-        <div className="absolute left-0 top-0 bottom-0 w-[30%] bg-gradient-to-r from-white via-white/95 to-transparent z-10 pointer-events-none" />
+        {/* Fade gradient from left - covers 30% of the visible area - hidden on mobile */}
+        <div className="hidden md:block absolute left-0 top-0 bottom-0 w-[30%] bg-gradient-to-r from-white via-white/95 to-transparent z-10 pointer-events-none" />
         
-        <div className="w-[70%] ml-auto overflow-hidden">
+        <div className="w-full md:w-[70%] md:ml-auto overflow-hidden">
           <Carousel
             setApi={setCarouselApi}
             opts={{
@@ -268,18 +268,18 @@ export function DoctorsSection({
               breakpoints: {
                 "(max-width: 768px)": {
                   dragFree: true,
-                  align: "start",
+                  align: "center",
                 },
               },
             }}
           >
-            <CarouselContent className="ml-auto mr-0">
+            <CarouselContent className="ml-0 md:ml-auto mr-0">
             {doctors.map((doctor) => (
               <CarouselItem
                 key={doctor.id}
-                className="basis-[320px] pl-[20px] lg:basis-[380px]"
+                className="basis-full md:basis-[320px] pl-4 md:pl-[20px] lg:basis-[380px]"
               >
-                <div className="group relative h-full min-h-[32rem] max-w-full overflow-hidden rounded-2xl border-2 border-green-100 bg-white hover:border-primary transition-all duration-300 hover:shadow-xl hover:shadow-primary/10">
+                <div className="group relative h-full min-h-[32rem] max-w-full mx-auto md:mx-0 overflow-hidden rounded-2xl border-2 border-green-100 bg-white hover:border-primary transition-all duration-300 hover:shadow-xl hover:shadow-primary/10">
                   {/* Doctor Image with bottom shadow */}
                   <div className="relative w-full h-full bg-gradient-to-br from-green-50 to-green-100 overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
                     <Image

@@ -138,7 +138,7 @@ function ElegantShape({
 
 function HeroGeometric({
 
-    badge = "Diş Kliniği",
+    badge = "Vds Dental",
 
     title1 = "Sağlıklı Gülüşler",
 
