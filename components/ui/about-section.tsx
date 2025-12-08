@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
@@ -79,7 +79,7 @@ export function AboutSection({
   aboutLink = "#",
   backgroundImage = "https://images.unsplash.com/photo-1606811971618-4486d14f3f99?w=1920&q=80",
 }: AboutSectionProps) {
-  const fadeInVariants = {
+  const fadeInVariants: Variants = {
     hidden: { opacity: 0, y: 30 },
     visible: (i: number) => ({
       opacity: 1,
@@ -87,7 +87,6 @@ export function AboutSection({
       transition: {
         duration: 0.8,
         delay: i * 0.1,
-        ease: "easeInOut",
       },
     }),
   };
