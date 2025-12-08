@@ -1,11 +1,9 @@
 "use client";
 
 import { Suspense, useEffect, useRef, useMemo } from "react";
-import { RotateCcw } from "lucide-react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Environment } from "@react-three/drei";
 import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader.js";
-import { MTLLoader } from "three/examples/jsm/loaders/MTLLoader.js";
 import { useLoader } from "@react-three/fiber";
 import * as THREE from "three";
 import type { ThreeEvent } from "@react-three/fiber";
@@ -204,7 +202,7 @@ export function Calculator3DModel({
       </div>
 
       {/* 3D Model */}
-      <div className="relative w-full aspect-square bg-gradient-to-br from-green-100 to-green-200 rounded-lg overflow-hidden mb-4">
+      <div className="relative w-full aspect-square bg-gradient-to-br from-green-100 to-green-200 rounded-lg overflow-hidden">
         <Canvas
           camera={{ position: [0, 0.5, 2.5], fov: 50 }}
           gl={{ antialias: true }}
@@ -212,19 +210,6 @@ export function Calculator3DModel({
         >
           <Scene selectedTeeth={selectedTeeth} onToothSelect={onToothSelect} />
         </Canvas>
-      </div>
-
-      {/* 360° Rotation Indicator */}
-      <div className="flex items-center justify-center gap-2 text-sm text-green-700 mb-4">
-        <RotateCcw className="w-4 h-4" />
-        <span>360°</span>
-        <RotateCcw className="w-4 h-4 rotate-180" />
-      </div>
-
-      {/* Thumbnail Views */}
-      <div className="flex gap-2 justify-center">
-        <div className="w-16 h-16 bg-green-200 rounded-lg border-2 border-green-300"></div>
-        <div className="w-16 h-16 bg-green-200 rounded-lg border-2 border-green-300"></div>
       </div>
     </div>
   );
