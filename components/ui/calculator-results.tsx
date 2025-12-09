@@ -232,9 +232,9 @@ export function CalculatorResults({ state }: CalculatorResultsProps) {
         <ul className="space-y-1.5">
           {calculations.plan.map((item, index) => (
             <li key={index} className="flex items-start gap-2">
-              <Check className="w-3 h-3 text-green-400 mt-0.5 shrink-0" />
+            <Check className="w-3 h-3 text-green-400 mt-0.5 shrink-0" />
               <span className="text-xs leading-relaxed">{item}</span>
-            </li>
+          </li>
           ))}
         </ul>
       </div>

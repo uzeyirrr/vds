@@ -1,8 +1,8 @@
 "use client";
 
-import { Suspense, useEffect, useRef, useMemo } from "react";
+import { Suspense, useEffect, useRef, useMemo, useState, useCallback } from "react";
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls, Environment } from "@react-three/drei";
+import { OrbitControls, Grid } from "@react-three/drei";
 import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader.js";
 import { useLoader } from "@react-three/fiber";
 import * as THREE from "three";
@@ -50,22 +50,22 @@ function SelectableTooth({
     }
   }, []);
 
-  const handleClick = (e: ThreeEvent<MouseEvent>) => {
+  const handleClick = useCallback((e: ThreeEvent<MouseEvent>) => {
     e.stopPropagation();
     onSelect(toothIndex);
-  };
+  }, [toothIndex, onSelect]);
 
-  const handlePointerEnter = () => {
+  const handlePointerEnter = useCallback(() => {
     if (meshRef.current && !isSelected && hoveredMaterial.current) {
       meshRef.current.material = hoveredMaterial.current;
     }
-  };
+  }, [isSelected]);
 
-  const handlePointerLeave = () => {
+  const handlePointerLeave = useCallback(() => {
     if (meshRef.current && !isSelected && originalMaterial.current) {
       meshRef.current.material = originalMaterial.current;
     }
-  };
+  }, [isSelected]);
 
   useEffect(() => {
     if (meshRef.current) {
@@ -101,31 +101,33 @@ function ToothModel({
     const meshes: THREE.Mesh[] = [];
     obj.traverse((child) => {
       if (child instanceof THREE.Mesh) {
-        child.material = new THREE.MeshStandardMaterial({
-          color: "#f1f8e9",
-          metalness: 0.2,
-          roughness: 0.8,
-          flatShading: false,
-          side: THREE.DoubleSide,
-        });
-        child.castShadow = true;
-        child.receiveShadow = true;
+          child.material = new THREE.MeshStandardMaterial({
+            color: "#ffffff",
+            metalness: 0.1,
+            roughness: 0.6,
+            flatShading: false,
+            side: THREE.DoubleSide,
+            emissive: "#f5f5f5",
+            emissiveIntensity: 0.2,
+          });
+        child.castShadow = false;
+        child.receiveShadow = false;
         meshes.push(child);
       }
     });
     return meshes;
   }, [obj]);
 
-  const handleToothSelect = (index: number) => {
+  const handleToothSelect = useCallback((index: number) => {
     const toothId = `tooth-${index}`;
     if (selectedTeeth.includes(toothId)) {
       onToothSelect(selectedTeeth.filter((id) => id !== toothId));
     } else {
       onToothSelect([...selectedTeeth, toothId]);
     }
-  };
+  }, [selectedTeeth, onToothSelect]);
 
-  const isAllSelected = selectedTeeth.includes("all");
+  const isAllSelected = useMemo(() => selectedTeeth.includes("all"), [selectedTeeth]);
 
   return (
     <group scale={[0.3, 0.3, 0.3]} position={[0, 0, 0]}>
@@ -145,17 +147,29 @@ function ToothModel({
 function Scene({ selectedTeeth, onToothSelect }: { selectedTeeth: string[]; onToothSelect: (teeth: string[]) => void }) {
   return (
     <>
-      <ambientLight intensity={0.5} />
+      <color attach="background" args={["#ffffff"]} />
+      <ambientLight intensity={1.2} />
       <directionalLight 
         position={[5, 5, 5]} 
-        intensity={0.8}
-        castShadow
-        shadow-mapSize-width={2048}
-        shadow-mapSize-height={2048}
+        intensity={1.5}
       />
-      <directionalLight position={[-5, 5, -5]} intensity={0.4} />
+      <directionalLight position={[-5, 5, -5]} intensity={1.0} />
+      <directionalLight position={[0, 10, 0]} intensity={0.8} />
+      <pointLight position={[0, 2, 3]} intensity={0.6} />
+      <Grid
+        renderOrder={-1}
+        position={[0, -0.5, 0]}
+        infiniteGrid
+        cellSize={0.5}
+        cellThickness={0.5}
+        cellColor="#e0e0e0"
+        sectionSize={2.5}
+        sectionThickness={1}
+        sectionColor="#bdbdbd"
+        fadeDistance={10}
+        fadeStrength={1}
+      />
       <Suspense fallback={null}>
-        <Environment preset="studio" />
         <ToothModel selectedTeeth={selectedTeeth} onToothSelect={onToothSelect} />
       </Suspense>
       <OrbitControls 
@@ -165,6 +179,8 @@ function Scene({ selectedTeeth, onToothSelect }: { selectedTeeth: string[]; onTo
         maxDistance={6}
         autoRotate={false}
         target={[0, 0, 0]}
+        enableDamping={true}
+        dampingFactor={0.05}
       />
     </>
   );
@@ -174,15 +190,40 @@ export function Calculator3DModel({
   selectedTeeth,
   onToothSelect,
 }: Calculator3DModelProps) {
-  const isAllSelected = selectedTeeth.includes("all");
+  const [isVisible, setIsVisible] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  const handleSelectAll = () => {
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+            observer.disconnect();
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: "50px" }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
+  const isAllSelected = useMemo(() => selectedTeeth.includes("all"), [selectedTeeth]);
+
+  const handleSelectAll = useCallback(() => {
     if (isAllSelected) {
       onToothSelect([]);
     } else {
       onToothSelect(["all"]);
     }
-  };
+  }, [isAllSelected, onToothSelect]);
 
   return (
     <div className="bg-green-50 rounded-xl p-6 border border-green-100 h-full">
@@ -202,14 +243,29 @@ export function Calculator3DModel({
       </div>
 
       {/* 3D Model */}
-      <div className="relative w-full aspect-square bg-gradient-to-br from-green-100 to-green-200 rounded-lg overflow-hidden">
-        <Canvas
-          camera={{ position: [0, 0.5, 2.5], fov: 50 }}
-          gl={{ antialias: true }}
-          shadows
-        >
-          <Scene selectedTeeth={selectedTeeth} onToothSelect={onToothSelect} />
-        </Canvas>
+      <div 
+        ref={containerRef}
+        className="relative w-full aspect-square bg-gradient-to-br from-green-100 to-green-200 rounded-lg overflow-hidden"
+      >
+        {isVisible ? (
+          <Canvas
+            camera={{ position: [0, 0.5, 2.5], fov: 50 }}
+            gl={{ 
+              antialias: true,
+              powerPreference: "high-performance",
+              alpha: false
+            }}
+            dpr={[1, 2]}
+            performance={{ min: 0.5 }}
+            style={{ background: "#ffffff" }}
+          >
+            <Scene selectedTeeth={selectedTeeth} onToothSelect={onToothSelect} />
+          </Canvas>
+        ) : (
+          <div className="w-full h-full flex items-center justify-center">
+            <div className="text-green-600 text-sm">Yükleniyor...</div>
+          </div>
+        )}
       </div>
     </div>
   );
