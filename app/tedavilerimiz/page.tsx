@@ -1,3 +1,5 @@
+"use client";
+
 import { ServicesSection } from "@/components/ui/services-section";
 import { motion } from "framer-motion";
 
