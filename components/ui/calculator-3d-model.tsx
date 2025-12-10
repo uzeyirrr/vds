@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useEffect, useRef, useMemo, useState, useCallback } from "react";
+import { Suspense, useEffect, useRef, useMemo, useCallback } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Grid } from "@react-three/drei";
 import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader.js";
@@ -190,31 +190,6 @@ export function Calculator3DModel({
   selectedTeeth,
   onToothSelect,
 }: Calculator3DModelProps) {
-  const [isVisible, setIsVisible] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setIsVisible(true);
-            observer.disconnect();
-          }
-        });
-      },
-      { threshold: 0.1, rootMargin: "50px" }
-    );
-
-    if (containerRef.current) {
-      observer.observe(containerRef.current);
-    }
-
-    return () => {
-      observer.disconnect();
-    };
-  }, []);
-
   const isAllSelected = useMemo(() => selectedTeeth.includes("all"), [selectedTeeth]);
 
   const handleSelectAll = useCallback(() => {
@@ -243,29 +218,20 @@ export function Calculator3DModel({
       </div>
 
       {/* 3D Model */}
-      <div 
-        ref={containerRef}
-        className="relative w-full aspect-square bg-gradient-to-br from-green-100 to-green-200 rounded-lg overflow-hidden"
-      >
-        {isVisible ? (
-          <Canvas
-            camera={{ position: [0, 0.5, 2.5], fov: 50 }}
-            gl={{ 
-              antialias: true,
-              powerPreference: "high-performance",
-              alpha: false
-            }}
-            dpr={[1, 2]}
-            performance={{ min: 0.5 }}
-            style={{ background: "#ffffff" }}
-          >
-            <Scene selectedTeeth={selectedTeeth} onToothSelect={onToothSelect} />
-          </Canvas>
-        ) : (
-          <div className="w-full h-full flex items-center justify-center">
-            <div className="text-green-600 text-sm">Yükleniyor...</div>
-          </div>
-        )}
+      <div className="relative w-full aspect-square bg-gradient-to-br from-green-100 to-green-200 rounded-lg overflow-hidden">
+        <Canvas
+          camera={{ position: [0, 0.5, 2.5], fov: 50 }}
+          gl={{ 
+            antialias: true,
+            powerPreference: "high-performance",
+            alpha: false
+          }}
+          dpr={[1, 2]}
+          performance={{ min: 0.5 }}
+          style={{ background: "#ffffff" }}
+        >
+          <Scene selectedTeeth={selectedTeeth} onToothSelect={onToothSelect} />
+        </Canvas>
       </div>
     </div>
   );
