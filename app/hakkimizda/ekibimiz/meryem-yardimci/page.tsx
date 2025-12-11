@@ -77,10 +77,10 @@ export default function MeryemYardimci() {
               {/* Doctor Image */}
               <div className="relative w-full aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-green-100 to-green-200">
                 <Image
-                  src="/ekip.webp"
+                  src="/doktor/meryem.webp"
                   alt="DT. Meryem Yardımcı"
                   fill
-                  className="object-cover"
+                  className="object-cover object-top"
                   sizes="(max-width: 1024px) 100vw, 33vw"
                 />
               </div>

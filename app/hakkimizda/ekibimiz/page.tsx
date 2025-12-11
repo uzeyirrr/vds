@@ -11,7 +11,7 @@ export default function Ekibimiz() {
     {
       name: "DT. MERYEM YARDIMCI",
       title: "DOKTOR",
-      image: "/ekip.webp",
+      image: "/doktor/meryem.webp",
       description: "Meryem Yardımcı, İstanbul Aydın Üniversitesi Diş Hekimliği Fakültesi'nden mezun olmuştur ve diş hekimliği alanında uzmanlaşmış deneyimli bir hekimdir.",
       education: "İstanbul Aydın Üniversitesi Diş Hekimliği Fakültesi",
       specialties: ["Genel Diş Hekimliği", "Estetik Diş Hekimliği", "Hasta Bakımı"],
@@ -20,7 +20,7 @@ export default function Ekibimiz() {
     {
       name: "DR. AYKUT ARIK",
       title: "DOKTOR",
-      image: "/clinic iç foto.jpg",
+      image: "/doktor/aykut.webp",
       description: "Dr. Aykut Arık, implantoloji ve estetik diş hekimliği alanlarında uzmanlaşmış, deneyimli bir diş hekimidir. 2025 yılında VDS Diş Kliniği'ni kurmuştur.",
       education: "Diş Hekimliği Fakültesi",
       specialties: ["İmplantoloji", "Estetik Diş Hekimliği", "Diş Cerrahisi"],
@@ -78,7 +78,7 @@ export default function Ekibimiz() {
                       src={doctor.image}
                       alt={doctor.name}
                       fill
-                      className="object-cover"
+                      className="object-cover object-top"
                       sizes="(max-width: 768px) 100vw, 50vw"
                     />
                   </div>
