@@ -49,7 +49,7 @@ export default function Ekibimiz() {
               </span>
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-              Yüzler, Kişiye Özel Bakım
+              Kişiye Özel Bakım
             </h1>
             <p className="text-lg md:text-xl text-gray-600 max-w-3xl leading-relaxed">
               Uzman ekibimiz, deneyimli ve yetenekli diş hekimlerimizle size en iyi hizmeti sunmak için burada.
