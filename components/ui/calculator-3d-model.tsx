@@ -1,12 +1,13 @@
 "use client";
 
-import { Suspense, useEffect, useRef, useMemo, useCallback } from "react";
+import { Suspense, useEffect, useRef, useMemo, useCallback, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Grid } from "@react-three/drei";
 import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader.js";
 import { useLoader } from "@react-three/fiber";
 import * as THREE from "three";
 import type { ThreeEvent } from "@react-three/fiber";
+import { Button } from "@/components/ui/button";
 
 interface Calculator3DModelProps {
   selectedTeeth: string[];
@@ -190,6 +191,7 @@ export function Calculator3DModel({
   selectedTeeth,
   onToothSelect,
 }: Calculator3DModelProps) {
+  const [isModelLoaded, setIsModelLoaded] = useState(false);
   const isAllSelected = useMemo(() => selectedTeeth.includes("all"), [selectedTeeth]);
 
   const handleSelectAll = useCallback(() => {
@@ -199,6 +201,10 @@ export function Calculator3DModel({
       onToothSelect(["all"]);
     }
   }, [isAllSelected, onToothSelect]);
+
+  const handleLoadModel = useCallback(() => {
+    setIsModelLoaded(true);
+  }, []);
 
   return (
     <div className="bg-green-50 rounded-xl p-6 border border-green-100 h-full">
@@ -219,6 +225,18 @@ export function Calculator3DModel({
 
       {/* 3D Model */}
       <div className="relative w-full aspect-square bg-gradient-to-br from-green-100 to-green-200 rounded-lg overflow-hidden">
+        {!isModelLoaded ? (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="text-center">
+              <Button
+                onClick={handleLoadModel}
+                className="bg-green-600 hover:bg-green-700 text-white"
+              >
+                3D Yükle
+              </Button>
+            </div>
+          </div>
+        ) : (
           <Canvas
             camera={{ position: [0, 0.5, 2.5], fov: 50 }}
             gl={{ 
@@ -232,6 +250,7 @@ export function Calculator3DModel({
           >
             <Scene selectedTeeth={selectedTeeth} onToothSelect={onToothSelect} />
           </Canvas>
+        )}
       </div>
     </div>
   );
