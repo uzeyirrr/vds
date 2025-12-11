@@ -46,39 +46,13 @@ export function Header() {
 			hasMegaMenu: true,
 			megaMenuContent: [
 				{
-					title: 'Estetik Diş Hekimliği',
+					title: 'Tedavilerimiz',
 					links: [
-						{ label: 'Veneer', href: '/tedavilerimiz/veneer', description: 'Laminate ve zirkonyum veneer uygulamaları' },
-						{ label: 'Gülüş Tasarımı', href: '/tedavilerimiz/gulus-tasarimi', description: 'Kişiye özel gülüş tasarımı' },
-						{ label: 'Zirkonyum Kaplama', href: '/tedavilerimiz/zirkonyum-kaplama', description: 'Estetik ve dayanıklı zirkonyum kaplamalar' },
-						{ label: 'Diş Beyazlatma', href: '/tedavilerimiz/dis-beyazlatma', description: 'Ofis içi ve ev tipi beyazlatma' },
-					],
-				},
-				{
-					title: 'Ortodonti',
-					links: [
-						{ label: 'Şeffaf Plaklar', href: '/tedavilerimiz/seffaf-plaklar', description: 'Invisalign ve görünmez ortodonti' },
-						{ label: 'Metal Braketler', href: '/tedavilerimiz/metal-braketler', description: 'Geleneksel ortodonti tedavisi' },
-						{ label: 'Seramik Braketler', href: '/tedavilerimiz/seramik-braketler', description: 'Estetik braket seçeneği' },
-						{ label: 'Erken Dönem Tedavi', href: '/tedavilerimiz/erken-donem-tedavi', description: 'Çocuklarda ortodonti' },
-					],
-				},
-				{
-					title: 'İmplantoloji',
-					links: [
-						{ label: 'Tek Diş İmplant', href: '/tedavilerimiz/tek-dis-implant', description: 'Eksik diş için implant çözümü' },
-						{ label: 'Çoklu İmplant', href: '/tedavilerimiz/coklu-implant', description: 'Birden fazla diş için implant' },
-						{ label: 'Tam Ağız İmplant', href: '/tedavilerimiz/tam-agiz-implant', description: 'All-on-4 ve All-on-6 teknikleri' },
-						{ label: '3D Rehberli Cerrahi', href: '/tedavilerimiz/3d-rehberli-cerrahi', description: 'Dijital planlama ile implant' },
-					],
-				},
-				{
-					title: 'Diğer Tedaviler',
-					links: [
-						{ label: 'Cerrahi Diş Hekimliği', href: '/tedavilerimiz/cerrahi-dis-hekimligi', description: '20 yaş dişi çekimi ve cerrahi' },
-						{ label: 'Endodonti', href: '/tedavilerimiz/endodonti', description: 'Kök kanal tedavisi' },
-						{ label: 'Periodontoloji', href: '/tedavilerimiz/periodontoloji', description: 'Diş eti hastalıkları tedavisi' },
-						{ label: 'Pedodonti', href: '/tedavilerimiz/pedodonti', description: 'Çocuk diş hekimliği' },
+						{ label: 'Diş İmplantları', href: '/tedavilerimiz/dis-implantlari', description: 'Eksik dişler için kalıcı çözüm' },
+						{ label: 'Diş Dolgusu Tedavisi', href: '/tedavilerimiz/dis-dolgusu-tedavisi', description: 'Çürük dişler için dolgu uygulamaları' },
+						{ label: 'Kök Kanalı Tedavisi', href: '/tedavilerimiz/kok-kanali-tedavisi', description: 'Diş kurtarma tedavisi' },
+						{ label: 'Diş Kaplama Çeşitleri', href: '/tedavilerimiz/dis-kaplama-cesitleri', description: 'Zirkonyum, porselen ve metal kaplamalar' },
+						{ label: 'Diş Tedavi Rotası Planlama', href: '/tedavilerimiz/dis-tedavi-rotasi-planlama', description: 'Kişiye özel tedavi planlaması' },
 					],
 				},
 			],
@@ -89,39 +63,18 @@ export function Header() {
 			hasMegaMenu: true,
 			megaMenuContent: [
 				{
-					title: 'Klinik',
+					title: 'Hakkımızda',
 					links: [
-						{ label: 'Hikayemiz', href: '/hakkimizda/hikayemiz', description: 'VDS Dental\'in kuruluş hikayesi' },
-						{ label: 'Misyon ve Vizyon', href: '/hakkimizda/misyon-vizyon', description: 'Hedeflerimiz ve değerlerimiz' },
-						{ label: 'Teknoloji', href: '/hakkimizda/teknoloji', description: 'Kullandığımız modern teknolojiler' },
-						{ label: 'Sertifikalar', href: '/hakkimizda/sertifikalar', description: 'Akreditasyonlar ve sertifikalarımız' },
-					],
-				},
-				{
-					title: 'Ekip',
-					links: [
-						{ label: 'Doktorlarımız', href: '/hakkimizda/doktorlarimiz', description: 'Uzman diş hekimlerimiz' },
+						{ label: 'Klinik', href: '/hakkimizda/klinik', description: 'Klinik hakkında bilgiler' },
+						{ label: 'Hakkımızda', href: '/hakkimizda', description: 'Hakkımızda bilgileri' },
 						{ label: 'Ekibimiz', href: '/hakkimizda/ekibimiz', description: 'Tüm ekibimiz' },
-						{ label: 'Kariyer', href: '/hakkimizda/kariyer', description: 'Aramıza katılın' },
 					],
 				},
 			],
 		},
 		{
 			label: 'Sağlık Rehberi',
-			href: '/saglik-rehberi',
-			hasMegaMenu: true,
-			megaMenuContent: [
-				{
-					title: 'Rehber',
-					links: [
-						{ label: 'Blog', href: '/saglik-rehberi/blog', description: 'Diş sağlığı hakkında yazılar' },
-						{ label: 'SSS', href: '/saglik-rehberi/sss', description: 'Sık sorulan sorular' },
-						{ label: 'Hasta Hikayeleri', href: '/saglik-rehberi/hasta-hikayeleri', description: 'Başarı hikayeleri' },
-						{ label: 'Video Galeri', href: '/saglik-rehberi/video-galeri', description: 'Eğitici videolar' },
-					],
-				},
-			],
+			href: '/blog',
 		},
 		{
 			label: 'Bize Ulaşın',
