@@ -372,7 +372,7 @@ export default function BlogDetailPage({ params }: BlogDetailPageProps) {
             <div className="flex flex-wrap items-center gap-4 text-sm text-white/90">
               <div className="flex items-center gap-2">
                 <User className="w-4 h-4" />
-                <span>{post.author}</span>
+                <span>Dr. Aykut Arık</span>
               </div>
               <div className="flex items-center gap-2">
                 <Calendar className="w-4 h-4" />
@@ -432,18 +432,18 @@ export default function BlogDetailPage({ params }: BlogDetailPageProps) {
               <div className="mt-12 p-6 bg-gray-50 rounded-xl border border-gray-200">
                 <div className="flex items-start gap-4">
                   <div className="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center text-white font-bold text-xl flex-shrink-0">
-                    {post.author.split(" ").map(n => n[0]).join("")}
+                    DA
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-gray-900 mb-1">{post.author}</h3>
+                    <h3 className="text-lg font-bold text-gray-900 mb-1">Dr. Aykut Arık</h3>
                     <p className="text-sm text-gray-600 mb-3">
-                      {post.category} alanında uzman diş hekimi
+                      İmplantoloji ve Estetik Diş Hekimliği alanında uzman diş hekimi
                     </p>
                     <Link
-                      href="#"
+                      href="/hakkimizda/ekibimiz/aykut-arik"
                       className="text-sm text-green-600 hover:text-green-700 font-medium"
                     >
-                      Tüm yazıları görüntüle →
+                      Doktoru görüntüle →
                     </Link>
                   </div>
                 </div>
@@ -508,7 +508,7 @@ export default function BlogDetailPage({ params }: BlogDetailPageProps) {
                             <Tag className="w-4 h-4" />
                             {category}
                           </span>
-                          <span className="text-sm text-gray-400">({Math.floor(Math.random() * 10) + 1})</span>
+                          <span className="text-sm text-gray-400">({index + 3})</span>
                         </Link>
                       </li>
                     ))}

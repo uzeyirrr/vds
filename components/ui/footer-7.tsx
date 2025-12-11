@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa";
 import Image from "next/image";
 
@@ -32,28 +33,27 @@ const defaultSections = [
   {
     title: "Hizmetler",
     links: [
-      { name: "Estetik Diş Hekimliği", href: "#" },
-      { name: "Ortodonti", href: "#" },
-      { name: "İmplantoloji", href: "#" },
-      { name: "Beyazlatma", href: "#" },
+      { name: "Diş İmplantları", href: "/tedavilerimiz/dis-implantlari" },
+      { name: "Diş Dolgusu Tedavisi", href: "/tedavilerimiz/dis-dolgusu-tedavisi" },
+      { name: "Kök Kanalı Tedavisi", href: "/tedavilerimiz/kok-kanali-tedavisi" },
+      { name: "Diş Kaplama Çeşitleri", href: "/tedavilerimiz/dis-kaplama-cesitleri" },
     ],
   },
   {
     title: "Klinik",
     links: [
-      { name: "Hakkımızda", href: "#" },
-      { name: "Doktorlarımız", href: "#" },
-      { name: "Blog", href: "#" },
-      { name: "İletişim", href: "#" },
+      { name: "Hakkımızda", href: "/hakkimizda" },
+      { name: "Ekibimiz", href: "/hakkimizda/ekibimiz" },
+      { name: "Kliniğimiz", href: "/hakkimizda/klinik" },
+      { name: "İletişim", href: "/iletisim" },
     ],
   },
   {
     title: "Destek",
     links: [
-      { name: "Yardım", href: "#" },
-      { name: "Randevu", href: "#" },
-      { name: "SSS", href: "#" },
-      { name: "Gizlilik", href: "#" },
+      { name: "Sağlık Rehberi", href: "/blog" },
+      { name: "Kullanım Koşulları", href: "/kullanim-kosullari" },
+      { name: "Gizlilik Politikası", href: "/gizlilik-politikasi" },
     ],
   },
 ];
@@ -66,8 +66,8 @@ const defaultSocialLinks = [
 ];
 
 const defaultLegalLinks = [
-  { name: "Kullanım Koşulları", href: "#" },
-  { name: "Gizlilik Politikası", href: "#" },
+  { name: "Kullanım Koşulları", href: "/kullanim-kosullari" },
+  { name: "Gizlilik Politikası", href: "/gizlilik-politikasi" },
 ];
 
 export const Footer7 = ({
@@ -90,7 +90,7 @@ export const Footer7 = ({
           <div className="flex w-full flex-col justify-between gap-6 lg:items-start">
             {/* Logo */}
             <div className="flex items-center gap-2 lg:justify-start">
-              <a href={logo.url}>
+              <Link href={logo.url}>
                 <Image
                   src={logo.src}
                   alt={logo.alt}
@@ -99,7 +99,7 @@ export const Footer7 = ({
                   height={40}
                   className="h-20 w-30 object-contain"
                 />
-              </a>
+              </Link>
             </div>
             <p className="max-w-[70%] text-sm text-gray-600">
               {description}
@@ -124,7 +124,7 @@ export const Footer7 = ({
                       key={linkIdx}
                       className="font-medium hover:text-green-600 transition-colors"
                     >
-                      <a href={link.href}>{link.name}</a>
+                      <Link href={link.href}>{link.name}</Link>
                     </li>
                   ))}
                 </ul>
@@ -137,7 +137,7 @@ export const Footer7 = ({
           <ul className="order-1 flex flex-col gap-2 md:order-2 md:flex-row">
             {legalLinks.map((link, idx) => (
               <li key={idx} className="hover:text-green-600 transition-colors">
-                <a href={link.href}> {link.name}</a>
+                <Link href={link.href}> {link.name}</Link>
               </li>
             ))}
           </ul>
