@@ -3,6 +3,7 @@
 import { useState, useCallback } from "react";
 import { motion } from "framer-motion";
 import { MapPin, Phone, Mail, Clock, Send, User, MessageSquare } from "lucide-react";
+import { Breadcrumb } from "@/components/ui/breadcrumb";
 
 export default function Iletisim() {
   const [formData, setFormData] = useState({
@@ -38,21 +39,24 @@ export default function Iletisim() {
   return (
     <>
       {/* Hero Section */}
-      <section className="w-full bg-gradient-to-br from-green-50 to-green-100 py-16 md:py-24 px-4 md:px-6 lg:px-8">
+      <section className="w-full bg-white py-12 md:py-16 px-4 md:px-6 lg:px-8 border-b border-gray-100">
         <div className="container mx-auto max-w-7xl">
+          <Breadcrumb items={[{ label: "İletişim" }]} />
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-center mb-12"
+            className="max-w-4xl"
           >
-            <div className="text-sm md:text-base font-medium text-green-600 uppercase tracking-wider mb-4">
-              İletişim
+            <div className="inline-block px-4 py-2 bg-green-50 border border-green-200 rounded-full mb-6">
+              <span className="text-sm font-semibold text-green-700 uppercase tracking-wider">
+                İletişim
+              </span>
             </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
               Bize Ulaşın
             </h1>
-            <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-lg md:text-xl text-gray-600 max-w-3xl leading-relaxed">
               Sorularınız, önerileriniz veya randevu talepleriniz için bizimle iletişime geçin. 
               Size en kısa sürede dönüş yapacağız.
             </p>

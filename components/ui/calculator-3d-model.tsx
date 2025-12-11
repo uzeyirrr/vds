@@ -219,19 +219,19 @@ export function Calculator3DModel({
 
       {/* 3D Model */}
       <div className="relative w-full aspect-square bg-gradient-to-br from-green-100 to-green-200 rounded-lg overflow-hidden">
-        <Canvas
-          camera={{ position: [0, 0.5, 2.5], fov: 50 }}
-          gl={{ 
-            antialias: true,
-            powerPreference: "high-performance",
-            alpha: false
-          }}
-          dpr={[1, 2]}
-          performance={{ min: 0.5 }}
-          style={{ background: "#ffffff" }}
-        >
-          <Scene selectedTeeth={selectedTeeth} onToothSelect={onToothSelect} />
-        </Canvas>
+          <Canvas
+            camera={{ position: [0, 0.5, 2.5], fov: 50 }}
+            gl={{ 
+              antialias: true,
+              powerPreference: "high-performance",
+              alpha: false
+            }}
+            dpr={[1, 2]}
+            performance={{ min: 0.5 }}
+            style={{ background: "#ffffff" }}
+          >
+            <Scene selectedTeeth={selectedTeeth} onToothSelect={onToothSelect} />
+          </Canvas>
       </div>
     </div>
   );
