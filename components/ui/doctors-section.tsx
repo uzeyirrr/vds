@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowRight, ArrowLeft } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -20,6 +21,7 @@ interface Doctor {
   description: string;
   experience: string;
   image: string;
+  slug?: string;
 }
 
 interface DoctorsSectionProps {
@@ -40,69 +42,30 @@ export function DoctorsSection({
   doctors = [
     {
       id: "1",
-      name: "Dr. Ahmet Yılmaz",
-      role: "Ortodontist",
-      description: "Kök kanal tedavilerinde uzman, hassasiyet ve konforu birleştiriyor.",
-      experience: "2014'ten beri çalışıyor",
-      image: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400&q=80",
+      name: "DT. MERYEM YARDIMCI",
+      role: "DOKTOR",
+      description: "İstanbul Aydın Üniversitesi Diş Hekimliği Fakültesi'nden mezun olmuştur ve diş hekimliği alanında uzmanlaşmış deneyimli bir hekimdir.",
+      experience: "3+ yıl deneyim",
+      image: "/doktor/meryem.webp",
+      slug: "meryem-yardimci",
     },
     {
       id: "2",
-      name: "Dr. Ayşe Demir",
-      role: "Estetik Uzmanı",
-      description: "Veneer ve kozmetik bakım ile estetik dönüşümler yaratıyor.",
-      experience: "2016'dan beri çalışıyor",
-      image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&q=80",
-    },
-    {
-      id: "3",
-      name: "Dr. Mehmet Kaya",
-      role: "Endodontist",
-      description: "Kök kanal tedavilerinde uzman, hassasiyet ve konforu birleştiriyor.",
-      experience: "2012'den beri çalışıyor",
-      image: "https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=400&q=80",
-    },
-    {
-      id: "5",
-      name: "Dr. Can Arslan",
-      role: "Protez Uzmanı",
-      description: "İmplant ve protez tedavilerinde deneyimli, estetik çözümler sunuyor.",
-      experience: "2013'ten beri çalışıyor",
-      image: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=400&q=80",
-    },
-    {
-      id: "6",
-      name: "Dr. Elif Şahin",
-      role: "Pedodontist",
-      description: "Çocuk diş hekimliğinde uzman, çocuklara özel yaklaşım sergiliyor.",
-      experience: "2017'den beri çalışıyor",
-      image: "https://images.unsplash.com/photo-1551601651-2a8555f1a136?w=400&q=80",
-    },
-    {
-      id: "7",
-      name: "Dr. Burak Çelik",
-      role: "Oral Cerrah",
-      description: "Ağız ve çene cerrahisinde uzman, minimal invaziv teknikler kullanıyor.",
-      experience: "2011'den beri çalışıyor",
-      image: "https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=400&q=80",
-    },
-    {
-      id: "8",
-      name: "Dr. Seda Yıldız",
-      role: "Estetik Diş Hekimi",
-      description: "Gülüş tasarımı ve beyazlatma işlemlerinde uzman, doğal sonuçlar elde ediyor.",
-      experience: "2018'den beri çalışıyor",
-      image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&q=80",
+      name: "DR. AYKUT ARIK",
+      role: "BAŞHEKİM",
+      description: "İmplantoloji ve estetik diş hekimliği alanlarında uzmanlaşmış, deneyimli bir diş hekimidir. 2025 yılında VDS Diş Kliniği'ni kurmuştur.",
+      experience: "20+ yıl deneyim",
+      image: "/doktor/aykut.webp",
+      slug: "aykut-arik",
     },
   ],
-  viewAllText = "Tüm uzmanları gör",
-  viewAllLink = "#",
+  viewAllText = "Tüm ekibi gör",
+  viewAllLink = "/hakkimizda/ekibimiz",
   avatars = [
-    "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=100&q=80",
-    "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=100&q=80",
-    "https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=100&q=80",
+    "/doktor/meryem.webp",
+    "/doktor/aykut.webp",
   ],
-  totalCount = 17,
+  totalCount = 2,
 }: DoctorsSectionProps) {
   const [carouselApi, setCarouselApi] = useState<CarouselApi>();
   const [canScrollPrev, setCanScrollPrev] = useState(false);
@@ -164,7 +127,7 @@ export function DoctorsSection({
                 {title}
               </h2>
               <div className="flex items-center gap-2 -ml-2">
-                {avatars.slice(0, 3).map((avatar, index) => (
+                {avatars.slice(0, Math.min(avatars.length, 3)).map((avatar, index) => (
                   <div
                     key={index}
                     className="w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-white shadow-md overflow-hidden -ml-2 first:ml-0"
@@ -174,15 +137,17 @@ export function DoctorsSection({
                       alt={`Team member ${index + 1}`}
                       width={48}
                       height={48}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover object-top"
                     />
                   </div>
                 ))}
-                <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-primary/20 border-2 border-primary/30 flex items-center justify-center shadow-md -ml-2">
-                  <span className="text-primary font-semibold text-xs md:text-sm">
-                    +{totalCount - 3}
-                  </span>
-                </div>
+                {totalCount > avatars.length && (
+                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-primary/20 border-2 border-primary/30 flex items-center justify-center shadow-md -ml-2">
+                    <span className="text-primary font-semibold text-xs md:text-sm">
+                      +{totalCount - avatars.length}
+                    </span>
+                  </div>
+                )}
               </div>
             </motion.div>
 
@@ -279,14 +244,17 @@ export function DoctorsSection({
                 key={doctor.id}
                 className="basis-full md:basis-[320px] pl-4 md:pl-[20px] lg:basis-[380px]"
               >
-                <div className="group relative h-full min-h-[32rem] max-w-full mx-auto md:mx-0 overflow-hidden rounded-2xl border-2 border-green-100 bg-white hover:border-primary transition-all duration-300 hover:shadow-xl hover:shadow-primary/10">
+                <Link 
+                  href={doctor.slug ? `/hakkimizda/ekibimiz/${doctor.slug}` : "#"}
+                  className="block group relative h-full min-h-[32rem] max-w-full mx-auto md:mx-0 overflow-hidden rounded-2xl border-2 border-green-100 bg-white hover:border-primary transition-all duration-300 hover:shadow-xl hover:shadow-primary/10"
+                >
                   {/* Doctor Image with bottom shadow */}
                   <div className="relative w-full h-full bg-gradient-to-br from-green-50 to-green-100 overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
                     <Image
                       src={doctor.image}
                       alt={doctor.name}
                       fill
-                      className="object-cover object-center transition-transform duration-500 group-hover:scale-110"
+                      className="object-cover object-top transition-transform duration-500 group-hover:scale-110"
                       sizes="(max-width: 768px) 100vw, 33vw"
                     />
                     {/* Bottom shadow gradient for text readability */}
@@ -313,7 +281,7 @@ export function DoctorsSection({
                       </div>
                     </div>
                   </div>
-                </div>
+                </Link>
               </CarouselItem>
             ))}
             </CarouselContent>
