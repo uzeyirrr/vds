@@ -82,7 +82,7 @@ export function ServicesSection({
   }, []);
 
   return (
-    <section className="w-full bg-white py-16 md:py-24 px-4 md:px-6 lg:px-8">
+    <section className="w-full bg-gray-50 py-16 md:py-24 px-4 md:px-6 lg:px-8 border-t border-gray-200">
       <div className="container mx-auto max-w-7xl">
         {/* Header */}
         <div className="text-center mb-12 md:mb-16">

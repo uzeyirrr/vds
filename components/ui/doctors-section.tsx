@@ -111,7 +111,7 @@ export function DoctorsSection({
   }, [carouselApi, doctors.length]);
 
   return (
-    <section className="w-full bg-white py-16 md:py-24 px-4 md:px-6 lg:px-8">
+    <section className="w-full bg-white py-16 md:py-24 px-4 md:px-6 lg:px-8 border-t border-gray-200">
       <div className="container mx-auto max-w-7xl">
         {/* Header Section */}
         <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-12 md:mb-16 gap-6">

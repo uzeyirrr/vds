@@ -47,7 +47,7 @@ export function ConsultationSection({
   }, []);
 
   return (
-    <section className="w-full bg-white py-16 md:py-24 px-4 md:px-6 lg:px-8 relative overflow-hidden">
+    <section className="w-full bg-gray-50 py-16 md:py-24 px-4 md:px-6 lg:px-8 relative overflow-hidden border-t border-gray-200">
       {/* Background tooth images with different rotations and blur - Optimized with CSS */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden will-change-transform">
         <div
