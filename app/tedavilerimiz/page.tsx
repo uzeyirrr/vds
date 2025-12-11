@@ -19,7 +19,7 @@ export default function Tedavilerimiz() {
           >
             <div className="inline-block px-4 py-2 bg-green-50 border border-green-200 rounded-full mb-6">
               <span className="text-sm font-semibold text-green-700 uppercase tracking-wider">
-                Tedavilerimiz
+              Tedavilerimiz
               </span>
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">

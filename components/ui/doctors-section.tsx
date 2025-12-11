@@ -142,11 +142,11 @@ export function DoctorsSection({
                   </div>
                 ))}
                 {totalCount > avatars.length && (
-                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-primary/20 border-2 border-primary/30 flex items-center justify-center shadow-md -ml-2">
-                    <span className="text-primary font-semibold text-xs md:text-sm">
+                <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-primary/20 border-2 border-primary/30 flex items-center justify-center shadow-md -ml-2">
+                  <span className="text-primary font-semibold text-xs md:text-sm">
                       +{totalCount - avatars.length}
-                    </span>
-                  </div>
+                  </span>
+                </div>
                 )}
               </div>
             </motion.div>
